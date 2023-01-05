@@ -2,6 +2,7 @@
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;
+const testArr = [];
 
 // action creators
 const tablesRedux = (statePart = [], action) => {
