@@ -1,7 +1,7 @@
 //selectors
 
 // actions
-const createActionName = actionName => `app/tables/${actionName}`;
+//const createActionName = actionName => `app/tables/${actionName}`;
 
 // action creators
 const tablesRedux = (statePart = [], action) => {

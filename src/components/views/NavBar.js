@@ -1,10 +1,10 @@
-import {Navbar, Container, Nav, NavbarBrand} from 'react-bootstrap';
+import {Navbar, Container, Nav} from 'react-bootstrap';
 
 const NavBar = () => {
     return (
-        <Navbar>
+        <Navbar bg='dark'>
             <Container>
-                <NavbarBrand>Waiter App</NavbarBrand>
+                <Navbar.Brand>Waiter App</Navbar.Brand>
                 <Nav>
                     
                 </Nav>
