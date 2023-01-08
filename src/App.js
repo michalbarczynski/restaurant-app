@@ -1,20 +1,17 @@
+import NotFound from './components/pages/NotFound/NotFound';
+import Home from './components/pages/Home/Home';
+import { Container } from 'react-bootstrap';
+import NavBar from './components/views/NavBar';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Container>
+        <NavBar/>
+        <Home></Home>
+        <NotFound></NotFound>
+      </Container>
+    </main>
   );
 }
 
