@@ -1,12 +1,13 @@
-import {Navbar, Container, Nav} from 'react-bootstrap';
+import {Navbar, Container, Nav} from "react-bootstrap";
+
 
 const NavBar = () => {
     return (
-        <Navbar bg='dark'>
+        <Navbar className="rounded mt-4 mb-4 space-beetween" bg="primary" variant="dark">
             <Container>
                 <Navbar.Brand>Waiter App</Navbar.Brand>
                 <Nav>
-                    
+                    <Nav.Link href="/home">Home</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
