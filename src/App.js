@@ -7,10 +7,9 @@ function App() {
   return (
     <main>
       <Container>
-        <h1>test widoku</h1>
         <NavBar/>
-        <NotFound></NotFound>
         <Home></Home>
+        <NotFound></NotFound>
       </Container>
     </main>
   );
