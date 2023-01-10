@@ -24,4 +24,4 @@ function App() {
 }
 
 export default App;
-// useDispatch, useParams, useEffect, selectors w redux
+// useDispatch, useParams, useEffect, selectors in redux; try to change Route for a link
