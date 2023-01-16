@@ -24,4 +24,4 @@ function App() {
 }
 
 export default App;
-// useDispatch, useEffect, Navigate, 
+// Navigate, Table.js classes and elements, onChange target value
