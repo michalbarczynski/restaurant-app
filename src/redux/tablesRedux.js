@@ -13,3 +13,5 @@ const tablesRedux = (statePart = [], action) => {
   };
 };
 export default tablesRedux;
+
+//branch name developing-store-and-redux
