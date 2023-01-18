@@ -24,4 +24,5 @@ function App() {
 }
 
 export default App;
-//useParams, fetchTables analize; try to change Route for a link
+
+// Navigate, Table.js classes and elements, onChange target value, fetchTables analize; try to change Route for a link
