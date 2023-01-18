@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Navigate } from "react-router";
 import { Button, Col, Container, Form, Row} from "react-bootstrap";
-import { getTableByID, updateTable } from "../../redux/tablesRedux";
+import { getTableByID, updateTables } from "../../redux/tablesRedux";
 
 
 const Table = () => {
     const dispatch = useDispatch();
     const update = () => {
-        dispatch(updateTable());
+        dispatch(updateTables());
     }
 
     const { id } = useParams();
@@ -60,7 +60,7 @@ const Table = () => {
             <div>
                 <Container className="p-0">
                     <Col sm={3}>
-                        <h1 Table {tableData.id}></h1>
+                        <h1 Table {...tableData.id}></h1>
                         <Form>
                             <Form.Group className="d-inline-flex my-2 align-items-center">
                                 <Form.Label className="fw-bold pe-4">Status:</Form.Label>
