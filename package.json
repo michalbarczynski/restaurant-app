@@ -23,7 +23,11 @@
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "start": "npm-run-all -p start:*",
+    "start:react": "react-scripts start",
+    "start:server": "json-server --port 3131 --no-cors --delay 250 --watch public/db/app.json --routes public/db/routes.json"
+
   },
   "scripts": {
     "start": "react-scripts start",

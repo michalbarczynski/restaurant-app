@@ -15,10 +15,10 @@ const AllTables = () => {
             {tables.map(table => 
                 <ListGroup.Item className='d-flex justify-content-between align-items-start' key={table.id} status={table.status}>
                     <div>
-                        <h3>Table {table.id}</h3>
-                        <span><b>Status</b>{table.status}</span>
+                        <h3>Table: {table.id}</h3>
+                        <span><b>Status: </b>{table.status}</span>
                     </div>
-                    <Button as={Link} to={'/table' + table.id}>Show more</Button>
+                    <Button as={Link} to={'/table/' + table.id}>Show more</Button>
                 </ListGroup.Item>)}
         </ListGroup>
     </div>

@@ -12,7 +12,7 @@ const Table = () => {
     }
 
     const { id } = useParams();
-    const tableData = useSelector(state => getTableByID(state, parseInt(id)));
+    const tableData = useSelector(state => getTableByID(state, id));
     console.log(tableData);
 
     const [status, setStatus] = useState(tableData.status);

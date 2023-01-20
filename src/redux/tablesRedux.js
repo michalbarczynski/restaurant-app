@@ -19,7 +19,7 @@ export const fetchTables = () => {
     .then(tables => dispatch(updateTables(tables)));
   }
 }
-
+//analize carefully function below
 const tablesRedux = (statePart = [], action) => {
   switch (action.type) {
     case SHOW_TABLES:
@@ -32,5 +32,3 @@ const tablesRedux = (statePart = [], action) => {
   };
 };
 export default tablesRedux;
-
-//branch name developing-store-and-redux
