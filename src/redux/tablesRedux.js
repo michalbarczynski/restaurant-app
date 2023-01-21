@@ -31,4 +31,6 @@ const tablesRedux = (statePart = [], action) => {
       return statePart;
   };
 };
+
 export default tablesRedux;
+
