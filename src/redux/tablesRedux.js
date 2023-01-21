@@ -1,6 +1,8 @@
+import { API_URL } from '../../src/config';
+
 //selectors
-export const getAllTables = ({tables}) => tables;
-export const getTableByID = ({tables}, tableID) => tables.find(table => table.id === tableID);
+export const getAllTables = (state) => state.tables;
+export const getTableByID = ({tables}, tableID) => tables.find(table => table.id == tableID);
 
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;
@@ -14,11 +16,26 @@ export const showTables = payload => ({type: SHOW_TABLES, payload});
 
 export const fetchTables = () => {
   return(dispatch) => {
-    fetch('http://localhost:3131/api/tables')
-    .then(res => res.json)
-    .then(tables => dispatch(updateTables(tables)));
+    fetch(`${API_URL}/tables`)
+    .then(res => res.json())
+    .then(tables => dispatch(updateTables(tables)))
   }
 }
+
+export const updateTableValues = (newValues) => {
+  return(dispatch) => {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({...newValues}),
+    };
+    fetch(`${API_URL}/tables/${newValues.id}`, options)
+    .then(() => dispatch(updateTables(newValues)))
+  };
+};
+
 //analize carefully function below
 const tablesRedux = (statePart = [], action) => {
   switch (action.type) {

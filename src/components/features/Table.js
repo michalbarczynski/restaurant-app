@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Navigate } from "react-router";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row} from "react-bootstrap";
 import { getTableByID, updateTables } from "../../redux/tablesRedux";
 
 
 const Table = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const update = () => {
         dispatch(updateTables());
     }
 
-    const { id } = useParams();
-    const tableData = useSelector(state => getTableByID(state, id));
+    
+    const parsedID = parseInt(id);
+    const tableData = useSelector(state => getTableByID(state, parsedID));
     console.log(tableData);
 
     const [status, setStatus] = useState(tableData.status);

@@ -1,5 +1,5 @@
-import NotFound from './components/pages/NotFound/NotFound';
-import Home from './components/pages/Home/Home';
+import NotFound from './components/pages/NotFound';
+import Home from './components/pages/Home';
 import Header from './components/views/Header';
 import Footer from './components/views/Footer';
 import Table from './components/features/Table';
