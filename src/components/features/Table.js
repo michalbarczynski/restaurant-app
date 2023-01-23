@@ -3,34 +3,42 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row} from "react-bootstrap";
 import { getTableByID, updateTables } from "../../redux/tablesRedux";
-
+import { getAllStatuses } from "../../redux/statusRedux";
 
 const Table = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const update = () => {
-        dispatch(updateTables());
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(updateTables({
+            id, 
+            status, 
+            peopleAmount: parseInt(peopleAmount), 
+            maxPeopleAmount: parseInt(maxPeopleAmount), 
+            bill: parseInt(bill)
+        }));
+        navigate('/');
     }
 
-    
     const parsedID = parseInt(id);
     const tableData = useSelector(state => getTableByID(state, parsedID));
-    console.log(tableData);
+    const statusData = useSelector(getAllStatuses);
 
     const [status, setStatus] = useState(tableData.status);
     const [peopleAmount, setPeopleAmount] = useState(tableData.peopleAmount);
     const [maxPeopleAmount, setMaxPeopleAmount] = useState(tableData.maxPeopleAmount);
     const [bill, setBill] = useState(tableData.bill);
 
-    //need update dispatch from redux after store develope
-
     useEffect(() => {
         if(status === 'Busy') {
             setBill(0);
         } else if (status === 'Cleaning' || status === 'Free'){
             setPeopleAmount(0);
-        } //add reservation options
+        } else if (status === 'Reserved') {
+            setPeopleAmount(0);
+        }
     }, [status]);
 
     useEffect(() => {
@@ -64,15 +72,14 @@ const Table = () => {
                 <Container className="p-0">
                     <Col sm={3}>
                         <h1 Table {...tableData.id}></h1>
-                        <Form>
-                            <Form.Group className="d-inline-flex my-2 align-items-center">
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group as={Row} className="d-inline-flex my-2 align-items-center">
                                 <Form.Label className="fw-bold pe-4">Status:</Form.Label>
-                                <Form.Select onChange={event => setStatus(event.target.value)}>
-                                    <option>{tableData.status}</option>
-                                    <option value="1">Free</option>
-                                    <option value="2">Reserved</option>
-                                    <option value="3">Busy</option>
-                                    <option value="4">Cleaning</option>
+                                <Form.Select value={status} onChange={event => setStatus(event.target.value)}>
+                                    <option>{status}</option>
+                                    {statusData.map((statusOption) => (
+                                        <option key={statusOption}>{statusOption}</option>
+                                    ))}
                                 </Form.Select>
                             </Form.Group>
                             <Form.Group className="d-inline-flex my-2 align-items-center">
@@ -86,7 +93,7 @@ const Table = () => {
                                 <Form.Control type="number" value={bill} onChange={event => setBill(event.target.value)}/>
                             </Form.Group>
                         </Form>
-                        <Button onClick={update} className="mt-2">Update</Button>
+                        <Button variant="primary" className="mt-2" type="submit">Update</Button>
                     </Col>
                 </Container>
             </div>
@@ -94,7 +101,6 @@ const Table = () => {
     }
 };
 //secure or ensure that number values are return as number and are not negative
-//protect the page from invalid data or error
 //dispatch update method if redux store finished implemented in button
 
 export default Table;
