@@ -7,7 +7,7 @@ const NavBar = () => {
             <Container>
                 <Navbar.Brand>Waiter App</Navbar.Brand>
                 <Nav>
-                    <Nav.Link href="/home">Home</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
