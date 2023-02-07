@@ -8,11 +8,14 @@ export const getTableByID = ({tables}, tableID) => tables.find(table => table.id
 const createActionName = actionName => `app/tables/${actionName}`;
 const SHOW_TABLES = createActionName('SHOW_TABLES');
 const UPDATE_TABLES = createActionName('UPDATE_TABLES');
+const ADD_TABLE = createActionName('ADD_TABLE');
+const REMOVE_TABLE = createActionName('REMOVE_TABLE');
 
 // action creators
-
 export const updateTables = payload => ({type: UPDATE_TABLES, payload});
 export const showTables = payload => ({type: SHOW_TABLES, payload});
+export const addTable = payload => ({type: ADD_TABLE, payload});
+export const removeTable = payload => ({type: REMOVE_TABLE, payload});
 
 export const fetchTables = () => {
   return(dispatch) => {
