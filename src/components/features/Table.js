@@ -82,6 +82,7 @@ const Table = () => {
                                     ))}
                                 </Form.Select>
                             </Form.Group>
+
                             <Form.Group className="d-inline-flex my-2 align-items-center">
                                 <Form.Label className="fw-bold pe-4">People:</Form.Label>
                                 <Form.Control type="number" value={peopleAmount} onChange={event => setPeopleAmount(event.target.value)}/>
@@ -92,15 +93,15 @@ const Table = () => {
                                 <Form.Label className="fw-bold d-inline-flex">Bill:<span className="fw-normal ps-4 pe-1"></span></Form.Label>
                                 <Form.Control type="number" value={bill} onChange={event => setBill(event.target.value)}/>
                             </Form.Group>
+                            
+                            <Button variant="primary" className="mt-2" type="submit">Update</Button>
                         </Form>
-                        <Button variant="primary" className="mt-2" type="submit">Update</Button>
                     </Col>
                 </Container>
             </div>
         );
     }
 };
-//secure or ensure that number values are return as number and are not negative
 //dispatch update method if redux store finished implemented in button
 
 export default Table;

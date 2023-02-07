@@ -36,6 +36,7 @@ const initialState = {
             "bill": 130
         }
     ],
+    statuses: ["Busy", "Cleaning", "Free", "Reserved"]
 };
 
 export default initialState;   
