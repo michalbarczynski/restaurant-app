@@ -9,6 +9,13 @@ const Table = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const tableData = useSelector(state => getTableByID(state, parseInt(id)));
+    const statusData = useSelector(getAllStatuses);
+
+    const [status, setStatus] = useState(tableData.status);
+    const [peopleAmount, setPeopleAmount] = useState(tableData.peopleAmount);
+    const [maxPeopleAmount, setMaxPeopleAmount] = useState(tableData.maxPeopleAmount);
+    const [bill, setBill] = useState(tableData.bill);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -22,15 +29,6 @@ const Table = () => {
         navigate('/');
     }
 
-    const parsedID = parseInt(id);
-    const tableData = useSelector(state => getTableByID(state, parsedID));
-    const statusData = useSelector(getAllStatuses);
-
-    const [status, setStatus] = useState(tableData.status);
-    const [peopleAmount, setPeopleAmount] = useState(tableData.peopleAmount);
-    const [maxPeopleAmount, setMaxPeopleAmount] = useState(tableData.maxPeopleAmount);
-    const [bill, setBill] = useState(tableData.bill);
-
     useEffect(() => {
         if(status === 'Busy') {
             setBill(0);
@@ -42,7 +40,6 @@ const Table = () => {
     }, [status]);
 
     useEffect(() => {
-        console.log(peopleAmount, maxPeopleAmount);
         const peopleAmountValue = parseInt(peopleAmount);
         const maxPeopleAmountValue = parseInt(maxPeopleAmount);
 
@@ -82,7 +79,6 @@ const Table = () => {
                                     ))}
                                 </Form.Select>
                             </Form.Group>
-
                             <Form.Group className="d-inline-flex my-2 align-items-center">
                                 <Form.Label className="fw-bold pe-4">People:</Form.Label>
                                 <Form.Control type="number" value={peopleAmount} onChange={event => setPeopleAmount(event.target.value)}/>
@@ -93,7 +89,6 @@ const Table = () => {
                                 <Form.Label className="fw-bold d-inline-flex">Bill:<span className="fw-normal ps-4 pe-1"></span></Form.Label>
                                 <Form.Control type="number" value={bill} onChange={event => setBill(event.target.value)}/>
                             </Form.Group>
-                            
                             <Button variant="primary" className="mt-2" type="submit">Update</Button>
                         </Form>
                     </Col>
@@ -102,6 +97,5 @@ const Table = () => {
         );
     }
 };
-//dispatch update method if redux store finished implemented in button
 
 export default Table;

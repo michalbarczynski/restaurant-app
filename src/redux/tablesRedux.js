@@ -1,56 +1,48 @@
-import { API_URL } from '../../src/config';
+import { API_URL } from "../config";
 
 //selectors
-export const getAllTables = (state) => state.tables;
-export const getTableByID = ({tables}, tableID) => tables.find(table => table.id == tableID);
+export const getAllTables = state => state.tables;
+export const getTableByID = ({tables}, id) => tables.find(table => table.id == id);
 
-// actions
+// actions name
 const createActionName = actionName => `app/tables/${actionName}`;
-const SHOW_TABLES = createActionName('SHOW_TABLES');
 const UPDATE_TABLES = createActionName('UPDATE_TABLES');
-const ADD_TABLE = createActionName('ADD_TABLE');
-const REMOVE_TABLE = createActionName('REMOVE_TABLE');
+const EDIT_TABLE = createActionName('EDIT_TABLE');
 
-// action creators
+// action creators //
 export const updateTables = payload => ({type: UPDATE_TABLES, payload});
-export const showTables = payload => ({type: SHOW_TABLES, payload});
-export const addTable = payload => ({type: ADD_TABLE, payload});
-export const removeTable = payload => ({type: REMOVE_TABLE, payload});
+export const editTable = payload => ({type: EDIT_TABLE, payload})
 
 export const fetchTables = () => {
   return(dispatch) => {
     fetch(`${API_URL}/tables`)
     .then(res => res.json())
     .then(tables => dispatch(updateTables(tables)))
-  }
-}
+  };
+};
 
-export const updateTableValues = (newValues) => {
+export const editTableRequest = (newTableValues) => {
   return(dispatch) => {
     const options = {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({...newValues}),
+      body: JSON.stringify({ ...newTableValues}),
     };
-    fetch(`${API_URL}/tables/${newValues.id}`, options)
-    .then(() => dispatch(updateTables(newValues)))
-  };
-};
+    fetch(`${API_URL}/tables/${newTableValues.id}`, options)
+    .then(() => dispatch(editTable(newTableValues)))
+  }
+}
 
-//analize carefully function below
-const tablesRedux = (statePart = [], action) => {
+const tablesReducer = (statePart = [], action) => {
   switch (action.type) {
-    case SHOW_TABLES:
-      console.log([...action.payload]);
-      return [...action.payload];
     case UPDATE_TABLES:
-      return statePart.map(table => table.id === action.payload.id ? {...table, ...action.payload} : table);
+      return [...action.payload];
+    case EDIT_TABLE:
+      return statePart.map(table => (table.id === action.payload.id ? {...table, ...action.payload } : table ));
     default:
       return statePart;
   };
 };
-
-export default tablesRedux;
-
+export default tablesReducer;
