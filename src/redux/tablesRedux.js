@@ -1,48 +1,55 @@
 import { API_URL } from "../config";
 
-//selectors
-export const getAllTables = state => state.tables;
-export const getTableByID = ({tables}, id) => tables.find(table => table.id == id);
+// selectors
+export const getAllTableIds = (state) => state.tables.map((table) => table.id);
+export const getAllTables = (state) => state.tables;
+export const getTableByID = ({ tables }, tableId) =>
+  tables.find((table) => table.id === tableId);
 
 // actions name
-const createActionName = actionName => `app/tables/${actionName}`;
-const UPDATE_TABLES = createActionName('UPDATE_TABLES');
-const EDIT_TABLE = createActionName('EDIT_TABLE');
+const createActionName = (actionName) => `app/tables/${actionName}`;
+export const SHOW_TABLES = createActionName("SHOW_TABLES");
+export const UPDATE_TABLE = createActionName("UPDATE_TABLE");
 
-// action creators //
-export const updateTables = payload => ({type: UPDATE_TABLES, payload});
-export const editTable = payload => ({type: EDIT_TABLE, payload})
+// action creators
+export const showTables = (payload) => ({ type: SHOW_TABLES, payload });
+export const updateTable = (payload) => ({ type: UPDATE_TABLE, payload });
 
 export const fetchTables = () => {
-  return(dispatch) => {
+  return (dispatch) => {
     fetch(`${API_URL}/tables`)
-    .then(res => res.json())
-    .then(tables => dispatch(updateTables(tables)))
+      .then((res) => res.json())
+      .then((tables) => dispatch(showTables(tables)));
   };
 };
 
-export const editTableRequest = (newTableValues) => {
-  return(dispatch) => {
+export const updateTables = (data) => {
+  return (dispatch) => {
     const options = {
-      method: 'PUT',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...newTableValues}),
+      body: JSON.stringify(data),
     };
-    fetch(`${API_URL}/tables/${newTableValues.id}`, options)
-    .then(() => dispatch(editTable(newTableValues)))
-  }
-}
+    fetch(`${API_URL}/tables/${data.id}`, options)
+      .then((res) => res.json())
+      .then((data) => dispatch(updateTable(data)));
+  };
+};
+
 
 const tablesReducer = (statePart = [], action) => {
   switch (action.type) {
-    case UPDATE_TABLES:
+    case SHOW_TABLES:
       return [...action.payload];
-    case EDIT_TABLE:
-      return statePart.map(table => (table.id === action.payload.id ? {...table, ...action.payload } : table ));
+    case UPDATE_TABLE:
+      return statePart.map((table) =>
+        table.id === action.payload.id ? { ...table, ...action.payload } : table
+      );
     default:
       return statePart;
-  };
+  }
 };
+
 export default tablesReducer;
