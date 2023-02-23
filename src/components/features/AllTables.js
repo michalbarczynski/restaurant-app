@@ -5,7 +5,13 @@ import { Link } from 'react-router-dom';
 
 const AllTables = () => {
     const tables = useSelector(getAllTables);
-    
+    if(!tables) {
+        return (
+            <div class="spinner-border text-primary" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
+    }
     return (
     <div>
         <h1>All Tables</h1>
@@ -23,5 +29,5 @@ const AllTables = () => {
     </div>
     );
 };
-//repair flex alignment of status in the same row
+
 export default AllTables;
