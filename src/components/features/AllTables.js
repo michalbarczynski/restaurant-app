@@ -1,10 +1,17 @@
 import { ListGroup, Button } from 'react-bootstrap'; 
-import { useSelector } from 'react-redux';
-import { getAllTables } from '../../redux/tablesRedux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllTables, removeTables } from '../../redux/tablesRedux';
 import { Link } from 'react-router-dom';
 
 const AllTables = () => {
+    const dispatch = useDispatch();
     const tables = useSelector(getAllTables);
+
+    const handleClick = (e, id) => {
+        e.preventDefault();
+        dispatch(removeTables(id));
+    };
+
     if(!tables) {
         return (
             <div class="spinner-border text-primary" role="status">
@@ -22,7 +29,9 @@ const AllTables = () => {
                         <h3>Table: {table.id}</h3>
                         <span><b>Status: </b>{table.status}</span>
                     </div>
+                    <Button onClick={(e) => handleClick(e, table.id)}>Remove table</Button>
                     <Button as={Link} to={'/table/' + table.id}>Show more</Button>
+
                 </ListGroup.Item>
             )}
         </ListGroup>
