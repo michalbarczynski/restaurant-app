@@ -1,5 +1,6 @@
 import NotFound from './components/pages/NotFound';
 import Home from './components/pages/Home';
+import AddTableForm from './components/pages/AddTableForm';
 import Header from './components/views/Header';
 import Footer from './components/views/Footer';
 import Table from './components/features/Table';
@@ -20,7 +21,8 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/table/:id' element={<Table/>} />
+          <Route path='/newtable' element={<AddTableForm />}/>
+          <Route path='/table/:id' element={<Table/>}/>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
         <Footer/>
@@ -30,5 +32,3 @@ function App() {
 }
 
 export default App;
-
-// Navigate, Table.js classes and elements, onChange target value, fetchTables analize;
