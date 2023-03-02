@@ -4,7 +4,7 @@ import { STATUSES } from "./statusRedux";
 // selectors
 export const getAllTableIDs = (state) => state.tables.map((table) => table.id);
 export const getAllTables = (state) => state.tables;
-export const getTableByID = ({ tables }, tableId) => tables.find((table) => table.id === tableId);
+export const getTableByID = ({ tables }, tableId) => tables.find((table) => table.id == tableId);
 
 // actions name
 const createActionName = (actionName) => `app/tables/${actionName}`;
