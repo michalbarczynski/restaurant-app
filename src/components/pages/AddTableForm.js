@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { getAllTableIDs, getAllTables, addNewTable } from "../../redux/tablesRedux";
+import { getAllTableIDs, addNewTable } from "../../redux/tablesRedux";
 
 const AddTableForm = () => {
     const navigate = useNavigate();
