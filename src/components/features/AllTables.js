@@ -1,4 +1,4 @@
-import { ListGroup, Button } from 'react-bootstrap'; 
+import { ListGroup, Button, Stack } from 'react-bootstrap'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllTables, removeTables } from '../../redux/tablesRedux';
 import { Link } from 'react-router-dom';
@@ -24,14 +24,15 @@ const AllTables = () => {
         <h1>All Tables</h1>
         <ListGroup variant='flush'>
             {tables.map(table => 
-                <ListGroup.Item className='d-flex justify-content-between align-items-start' key={table.id}>
-                    <div>
-                        <h3>Table: {table.id}</h3>
-                        <span><b>Status: </b>{table.status}</span>
-                    </div>
-                    <Button onClick={(e) => handleClick(e, table.id)}>Remove table</Button>
-                    <Button as={Link} to={'/table/' + table.id}>Show more</Button>
-
+                <ListGroup.Item className='px-0' key={table.id}>
+                    <Stack direction='horizontal' gap={4}>
+                        <h3 className='my-2'>Table: {table.id}</h3>
+                        <span className='mb-0'><b>Status: </b>{table.status}</span>
+                        <Link className='ms-auto' to={'/table/' + table.id}>
+                            <Button variant='primary'>Show more</Button>
+                        </Link>
+                        <Button onClick={(e) => handleClick(e, table.id)}>Remove table</Button>
+                    </Stack>
                 </ListGroup.Item>
             )}
         </ListGroup>
