@@ -18,7 +18,7 @@ const AllTables = () => {
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         );
-      }
+    }
     return (
     <div>
         <h1>All Tables</h1>
