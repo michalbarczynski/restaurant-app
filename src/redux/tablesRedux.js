@@ -45,10 +45,13 @@ export const addNewTable = (id) => {
       },
       body: JSON.stringify(newTable),
     };
-    fetch(`${API_URL}/tables`, options)
+
+    const request = fetch(`${API_URL}/tables`, options)
     .then(res => res.json())
     .then((data => dispatch(addTable(data))))
     .catch((error) => { console.log(error) });
+
+    console.log(request);
   }
 }
 
