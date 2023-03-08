@@ -23,7 +23,8 @@ export const fetchTables = () => {
   return (dispatch) => {
     fetch(`${API_URL}/tables`)
       .then((res) => res.json())
-      .then((tables) => dispatch(showTables(tables)));
+      .then((tables) => dispatch(showTables(tables)))
+      .catch((error) => { console.log(error) })
   };
 };
 
@@ -47,6 +48,7 @@ export const addNewTable = (id) => {
     fetch(`${API_URL}/tables`, options)
     .then(res => res.json())
     .then((data => dispatch(addTable(data))))
+    .catch((error) => { console.log(error) });
   }
 }
 
@@ -61,7 +63,8 @@ export const updateTables = (data) => {
     };
     fetch(`${API_URL}/tables/${data.id}`, options)
     .then((res) => res.json())
-    .then((data) => dispatch(updateTable(data)));
+    .then((data) => dispatch(updateTable(data)))
+    .catch((error) => { console.log(error) });
   };
 };
 
@@ -71,6 +74,7 @@ export const removeTables = id => {
     fetch(`${API_URL}/tables/${id}`, { method: "DELETE"})
     .then((res) => res.json())
     .then((data) => console.log(data + 'removed'))
+    .catch((error) => { console.log(error) })
   }
 };
 
